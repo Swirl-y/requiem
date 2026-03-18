@@ -6,7 +6,6 @@ body {
     background-color: #333;
     color: whitesmoke;
 }
-
 a {
     color: aliceblue;
 }
@@ -17,4 +16,8 @@ a:visited {
 
 a:hover, a:active {
     color: #eee;
+}
+
+#app canvas {
+  border: 1px solid red;
 }
