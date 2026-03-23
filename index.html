@@ -15,12 +15,13 @@
   </head>
   
   <body>
+    <header>
     <div id="app"></div>
    <script type="module" src="/src/sketch.js"></script>
    <h1>My Goals for the year</h1>
     
 
-   <hr>
+   
 
    <nav>
           <ul>
@@ -31,9 +32,12 @@
                    <li>
                      <a href="#vacation">Planning a Vacation</a>
                    </li>
+                   <li>
+                     <a href="#contact">Contact Me</a>
+                   </li>
          </ul>
    </nav>
-
+   </header>
 
 
 
@@ -53,8 +57,74 @@
         <a href="https://developer.mozilla.org/">MDN</a>
       </abbr>.</li>
   </ol>
+       <aside>
+        <details>
+          <summary>Guess the <mark>number of hours</mark> I code every day</summary>
+            <p>I start at<time datetime="09:00"> 9 am</time> and I write code for <time datetime="PT5H">5 hours</time> everyday</p>
+        </details>
   </section>
-<hr>
+                   <br>
+                       <table>
+                        <caption>My Daily Schedule</caption>
+                        <thead>
+                          <tr>
+                               <th>&nbsp;</th>
+                               <th scope="col">Time</th>
+                              <th scope="col">Activity</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                       <tr>
+                        <th scope="row">Morning</th>
+                         <td>
+                            <time datetime="09:00">09:00am</time>-<time datetime="11:30">11:30am</time>
+                           </td>
+                          <td>Write Code</td>
+                      </tr>
+                       
+                      <tr>
+                        <th scope="row">Break</th>
+                         <td>
+                            <time datetime="11:30">11:30am</time>-<time datetime="12:30">12:30pm</time>
+                           </td>
+                          <td>Eat Lucnh and Workout</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Afternoon</th>
+                         <td>
+                            <time datetime="12:30">12:30pm</time>-<time datetime="16:00">16:00pm</time>
+                           </td>
+                          <td>Study for other Courses</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Evening</th>
+                        <td rowspan="2">All Other Times</td>
+                        <td>Free Time</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Night</th>
+                        <td>Sleep</td>
+                      </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="2">And that's what I do everyday, 5 days a week. Just eat, sleep, code ..and recharge!</td>
+                        </tr>
+                      </tfoot>
+            </table>
+   <tr>
+
+   </tr>
+
+
+  <hr>
+
+
+
+
+
+
+
 <section id="vacation">
 <h2>I Am Also Planning a Vacation</h2>
     <p>I've been working hard and <em>really need a getaway</em>.</p>
@@ -64,8 +134,13 @@
     <h3>Place i'd Like to Visit</h3>
     <ul>
        <li><p>I've heard good things about the Caribbean.</p></li>
-        <img src="plaga.jpg" alt="Soft and wet"> <loading=Lazy>
-                                            
+       <figure>
+        <img src="beach.png" alt="Soft and wet"> <loading=Lazy>
+
+               <figcaption>
+                Caribbean Beach
+                </figcaption>
+           </figure>                                   
       <li><p>I've heard good things about going here:</p>
     <address>Athens,Greece<br>
      Krabi,Thailand</address>
@@ -85,6 +160,60 @@
   
     </dl>
     </section>
+<hr>
+<article id="contact">
+  <h2>Contact Me</h2>
+  <p>I'd really like to hear from you!</p>
+  
+ <form action="https://httbin.org/get"      method="get">
+    <fieldset>
+      <legend>Personal Info</legend>
+    <p>
+     <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" id="firstName" placeholder="Jane" autocomplete="on" required autofocus>
+    </p>
+     <p>
+    <label for="lastName">Last Name:</label>
+    <input type="text" name="lastName" id="lastName" placeholder="Doe" autocomplete="on" required>
+    </p>
+      <p>
+      <label for="password">Password:</label>
+    <input type="password" name="password" id="password" placeholder="Your Secret"  required>
+    </p>
+      <p>
+      <label for="phone">Phone:</label>
+    <input type="tel" name="phone" id="phone" placeholder="5555555555" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"required>
+   </p>
+    <p>
+   <label for="decade">Favorit Decade:</label>
+    <input type="number" name="decade" id="decade" min="1950" max="2026" step="10" value="1980">
+    </p>
+ </form>
+  </fieldset>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <hr>
 &lt;&lt;&lt; &copy; <a href="about.html"> Orfeas Nilsson</a> &gt;&gt;&gt;
 <p>
