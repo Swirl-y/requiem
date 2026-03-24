@@ -167,12 +167,42 @@
             <p><input type="radio" name="food" id="other" value="other"><label for="other">Other</label></p>
           </fieldset>
         </fieldset>
-      </form>
-    </article>
- 
+      
+    <fieldset>
+  <legend>Do you have pets?</legend>
+  <p>
+    <input type="checkbox" name="pets" id="dog" value="dog">
+    <label for="dog">Dog</label>
+  </p>
+  <p>
+    <input type="checkbox" name="pets" id="cat" value="cat">
+    <label for="cat">Cat</label>
+  </p>
+  <p>
+    <input type="checkbox" name="pets" id="fish" value="fish">
+    <label for="fish">Fish</label>
+  </p>
+  <p>
+    <input type="checkbox" name="pets" id="otherpets" value="otherpets">
+    <label for="otherpets">Other</label>
+  </p>
+</fieldset>
+ <br>
+ <fieldset>
+   <legend>Send Me A Note</legend>
+  <label for="message">Your Message:</label>
+  <br>
+  <textarea name="message" id="message" cols="30" rows="10"
+    placeholder="Type your message here"></textarea>
+ </fieldset>
+   <br>
+   <button type="submit">Submit</button>
+   <button type="submit" formaction="https://httpbin.org/post" formmethod="post">Post</button>
+    <button type="reset">Reset</button>
     <hr>
     &lt;&lt;&lt; &copy; <a href="about.html">Orfeas Nilsson</a> &gt;&gt;&gt;
     <p><a href="#">Back to Top</a></p>
- 
+   </form>
+    </article>
   </body>
 </html>
