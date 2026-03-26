@@ -4,206 +4,682 @@
     <meta charset="UTF-8" />
     <meta name="description" content="This page contains all the things i am learning how to create as i learn HTML.">
     <meta name="author" content="Orfeas Nilsson">
- 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Requiem</title>
     <link rel="icon" href="plaga.jpg" type="image/x-icon">
     <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <style>
+      :root {
+        --bg: #0d0d0d;
+        --card: #161616;
+        --accent1: #f91687;
+        --accent2: #facc15;
+        --text: #f5f5f5;
+        --muted: #888;
+        --border: #2a2a2a;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'DM Sans', sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(249,22,135,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(249,22,135,0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 60px 24px 80px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* HEADER */
+      header {
+        margin-bottom: 64px;
+        animation: fadeUp 0.7s ease both;
+      }
+
+      #app {
+        margin-top: 24px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+
+      #app canvas { display: block; }
+
+      header .hero-tag {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent1);
+        font-weight: 500;
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      header h1 {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: clamp(52px, 12vw, 100px);
+        line-height: 0.92;
+        letter-spacing: 0.02em;
+        color: var(--text);
+        margin-bottom: 32px;
+      }
+
+      header h1 span { color: var(--accent1); }
+
+      .divider {
+        width: 60px;
+        height: 3px;
+        background: var(--accent1);
+        margin-bottom: 32px;
+        border-radius: 2px;
+      }
+
+      /* NAV */
+      nav {
+        margin-bottom: 8px;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      nav ul li a {
+        display: inline-block;
+        background: rgba(249,22,135,0.1);
+        border: 1px solid rgba(249,22,135,0.25);
+        color: var(--accent1);
+        font-size: 12px;
+        padding: 6px 16px;
+        border-radius: 99px;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+      }
+
+      nav ul li a:hover {
+        background: var(--accent1);
+        color: #0d0d0d;
+      }
+
+      /* HR */
+      hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 48px 0;
+      }
+
+      /* CARDS */
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s ease, border-color 0.25s ease;
+        animation: fadeUp 0.7s ease both;
+        margin-bottom: 20px;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent1);
+      }
+
+      .card::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent1), var(--accent2));
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+
+      .card:hover::after { opacity: 1; }
+
+      /* SECTIONS */
+      section, article {
+        animation: fadeUp 0.7s ease both;
+      }
+
+      h2 {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 36px;
+        letter-spacing: 0.05em;
+        color: var(--text);
+        margin-bottom: 12px;
+      }
+
+      h3 {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.05em;
+        color: var(--accent2);
+        margin: 20px 0 10px;
+      }
+
+      p {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.75;
+        font-weight: 300;
+        margin-bottom: 8px;
+      }
+
+      a {
+        color: var(--accent1);
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+
+      a:hover { opacity: 0.75; }
+
+      ol, ul {
+        padding-left: 20px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.9;
+        font-weight: 300;
+      }
+
+      dl {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      dt {
+        color: var(--accent2);
+        font-weight: 500;
+        margin-top: 10px;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.05em;
+      }
+
+      dd { padding-left: 16px; font-weight: 300; }
+
+      strong { color: var(--accent1); font-weight: 500; }
+      em { color: var(--accent2); font-style: italic; }
+      mark {
+        background: rgba(250,204,21,0.2);
+        color: var(--accent2);
+        padding: 0 4px;
+        border-radius: 3px;
+      }
+      abbr { border-bottom: 1px dashed var(--accent1); cursor: help; }
+
+      address {
+        font-style: normal;
+        color: var(--muted);
+        font-size: 14px;
+        padding: 10px 14px;
+        border-left: 2px solid var(--accent1);
+        margin-top: 8px;
+      }
+
+      /* ASIDE / DETAILS */
+      aside {
+        margin: 16px 0;
+      }
+
+      details {
+        background: rgba(249,22,135,0.05);
+        border: 1px solid rgba(249,22,135,0.2);
+        border-radius: 10px;
+        padding: 14px 18px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      summary {
+        cursor: pointer;
+        color: var(--text);
+        font-weight: 500;
+        font-size: 14px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      summary::before {
+        content: '▶';
+        color: var(--accent1);
+        font-size: 10px;
+        transition: transform 0.2s;
+      }
+
+      details[open] summary::before { transform: rotate(90deg); }
+
+      details p { margin-top: 10px; }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        margin: 24px 0;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+
+      caption {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.08em;
+        color: var(--accent1);
+        padding: 16px;
+        text-align: left;
+      }
+
+      thead tr {
+        background: rgba(249,22,135,0.08);
+      }
+
+      th {
+        padding: 12px 16px;
+        text-align: left;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        color: var(--accent2);
+        border-bottom: 1px solid var(--border);
+        font-weight: 400;
+      }
+
+      td {
+        padding: 11px 16px;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+        font-weight: 300;
+      }
+
+      tbody tr:hover td {
+        background: rgba(249,22,135,0.04);
+        color: var(--text);
+      }
+
+      tfoot td {
+        padding: 14px 16px;
+        color: var(--muted);
+        font-size: 13px;
+        font-style: italic;
+        border-top: 1px solid var(--border);
+        border-bottom: none;
+      }
+
+      /* FIGURE / IMAGE */
+      figure {
+        margin: 16px 0;
+        display: inline-block;
+      }
+
+      figure img {
+        max-width: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        display: block;
+      }
+
+      figcaption {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 6px;
+        letter-spacing: 0.05em;
+        text-align: center;
+      }
+
+      /* FORM */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      fieldset {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px 24px;
+        background: var(--card);
+      }
+
+      legend {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.08em;
+        color: var(--accent1);
+        padding: 0 8px;
+      }
+
+      label {
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 400;
+        display: inline-block;
+        margin-bottom: 4px;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="tel"],
+      input[type="number"],
+      textarea {
+        background: #1e1e1e;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 10px 14px;
+        width: 100%;
+        transition: border-color 0.2s;
+        display: block;
+        margin-top: 4px;
+      }
+
+      input:focus, textarea:focus {
+        outline: none;
+        border-color: var(--accent1);
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        accent-color: var(--accent1);
+        width: 15px;
+        height: 15px;
+        margin-right: 8px;
+        cursor: pointer;
+      }
+
+      fieldset p {
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+      }
+
+      fieldset p label { margin-bottom: 0; }
+
+      textarea {
+        resize: vertical;
+        margin-top: 8px;
+      }
+
+      button {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.1em;
+        padding: 12px 28px;
+        border-radius: 99px;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.15s;
+      }
+
+      button:hover { opacity: 0.85; transform: translateY(-1px); }
+      button:active { transform: translateY(0); }
+
+      button[type="submit"] {
+        background: var(--accent1);
+        color: #0d0d0d;
+      }
+
+      button[type="reset"] {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+
+      .btn-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      /* FOOTER */
+      .footer {
+        margin-top: 64px;
+        text-align: center;
+        font-size: 12px;
+        color: var(--border);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        animation: fadeUp 0.7s 0.5s ease both;
+      }
+
+      .footer a { color: var(--accent1); }
+      .back-top {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    </style>
   </head>
- 
+
   <body>
-    <header>
-      <div id="app"></div>
-       <script type="module" src="src/sketch.js"></script>
-     <script type="module" src="src/sprite.js"></script>
-      <h1>My Goals for the year</h1>
- 
-      <nav>
+    <div class="container">
+
+      <header>
+        <div id="app"></div>
+        <script type="module" src="src/sketch.js"></script>
+        <script type="module" src="src/sprite.js"></script>
+
+        <span class="hero-tag">My Goals for the Year</span>
+        <h1>REQUI<span>EM</span></h1>
+        <div class="divider"></div>
+
+        <nav>
+          <ul>
+            <li><a href="#html">Learning HTML</a></li>
+            <li><a href="#vacation">Planning a Vacation</a></li>
+            <li><a href="#contact">Contact Me</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <hr>
+
+      <section id="html" class="card">
+        <h2>I'm Ready to Learn HTML</h2>
+        <p>This is my first website</p>
+
+        <h3>My Daily Schedule</h3>
+        <p>Let me tell you how:</p>
+        <ol>
+          <li>...I learn more about web dev.</li>
+          <li>...I plan out my schedule.</li>
+          <li>...I use resources from <abbr title="Mozilla Developer Network"><a href="https://developer.mozilla.org/">MDN</a></abbr>.</li>
+        </ol>
+
+        <aside>
+          <details>
+            <summary>Guess the <mark>number of hours</mark> I code every day</summary>
+            <p>I start at <time datetime="09:00">9 am</time> and I write code for <time datetime="PT5H">5 hours</time> everyday</p>
+          </details>
+        </aside>
+      </section>
+
+      <table>
+        <caption>My Daily Schedule</caption>
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th scope="col">Time</th>
+            <th scope="col">Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Morning</th>
+            <td><time datetime="09:00">09:00am</time>–<time datetime="11:30">11:30am</time></td>
+            <td>Write Code</td>
+          </tr>
+          <tr>
+            <th scope="row">Break</th>
+            <td><time datetime="11:30">11:30am</time>–<time datetime="12:30">12:30pm</time></td>
+            <td>Eat Lunch and Workout</td>
+          </tr>
+          <tr>
+            <th scope="row">Afternoon</th>
+            <td><time datetime="12:30">12:30pm</time>–<time datetime="16:00">16:00pm</time></td>
+            <td>Study for other Courses</td>
+          </tr>
+          <tr>
+            <th scope="row">Evening</th>
+            <td rowspan="2">All Other Times</td>
+            <td>Free Time</td>
+          </tr>
+          <tr>
+            <th scope="row">Night</th>
+            <td>Sleep</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">And that's what I do everyday, 5 days a week. Just eat, sleep, code ..and recharge!</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <hr>
+
+      <section id="vacation" class="card">
+        <h2>I Am Also Planning a Vacation</h2>
+        <p>I've been working hard and <em>really need a getaway</em>.</p>
+        <p>I live in <abbr title="Sweden">SE</abbr> so i want to visit a beach.</p>
+
+        <h3>Places I'd Like to Visit</h3>
         <ul>
-          <li><a href="#html">Learning HTML</a></li>
-          <li><a href="#vacation">Planning a Vacation</a></li>
-          <li><a href="#contact">Contact Me</a></li>
+          <li>
+            <p>I've heard good things about the Caribbean.</p>
+            <figure>
+              <img src="beach.png" alt="Soft and wet" loading="lazy">
+              <figcaption>Caribbean Beach</figcaption>
+            </figure>
+          </li>
+          <li>
+            <p>I've heard good things about going here:</p>
+            <address>Athens, Greece<br>Krabi, Thailand</address>
+          </li>
         </ul>
-      </nav>
-    </header>
- 
-    <hr>
- 
-    <section id="html">
-      <h2>I'm ready to learn HTML</h2>
-      <p>This is my first website</p>
- 
-      <h3>My daily schedule</h3>
-      <p>Let me tell you how:</p>
-      <ol>
-        <li>...I learn more about web dev.</li>
-        <li>...I plan out my schedule.</li>
-        <li>...I use resources from <abbr title="Mozilla Developer Network"><a href="https://developer.mozilla.org/">MDN</a></abbr>.</li>
-      </ol>
- 
-      <aside>
-        <details>
-          <summary>Guess the <mark>number of hours</mark> I code every day</summary>
-          <p>I start at <time datetime="09:00">9 am</time> and I write code for <time datetime="PT5H">5 hours</time> everyday</p>
-        </details>
-      </aside>
-    </section> <!-- FIX 1: Moved closing </section> to here (was before the </aside> closing, leaving table outside the section) -->
- 
-    <br>
-    <table>
-      <caption>My Daily Schedule</caption>
-      <thead>
-        <tr>
-          <th>&nbsp;</th>
-          <th scope="col">Time</th>
-          <th scope="col">Activity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Morning</th>
-          <td><time datetime="09:00">09:00am</time>-<time datetime="11:30">11:30am</time></td>
-          <td>Write Code</td>
-        </tr>
-        <tr>
-          <th scope="row">Break</th>
-          <td><time datetime="11:30">11:30am</time>-<time datetime="12:30">12:30pm</time></td>
-          <td>Eat Lunch and Workout</td> <!-- FIX 2: Typo "Lucnh" → "Lunch" -->
-        </tr>
-        <tr>
-          <th scope="row">Afternoon</th>
-          <td><time datetime="12:30">12:30pm</time>-<time datetime="16:00">16:00pm</time></td>
-          <td>Study for other Courses</td>
-        </tr>
-        <tr>
-          <th scope="row">Evening</th>
-          <td rowspan="2">All Other Times</td>
-          <td>Free Time</td>
-        </tr>
-        <tr>
-          <th scope="row">Night</th>
-          <td>Sleep</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-              <td colspan="2">And that's what I do everyday, 5 days a week. Just eat, sleep, code ..and recharge!
-         </td>
-        </tr>
-      </tfoot>
-    </table>
-   
- 
-    <hr>
- 
-    <section id="vacation">
-      <h2>I Am Also Planning a Vacation</h2>
-      <p>I've been working hard and <em>really need a getaway</em>.</p>
- 
-      <p>I live in <abbr title="Sweden">SE</abbr> so i want to visit a beach.</p>
- 
-      <h3>Place i'd Like to Visit</h3>
-      <ul>
-        <li>
-          <p>I've heard good things about the Caribbean.</p>
-          <figure>
-            <img src="beach.png" alt="Soft and wet" loading="lazy"> <!-- FIX 4: Malformed loading attribute — moved inside the <img> tag as loading="lazy" -->
-            <figcaption>Caribbean Beach</figcaption>
-          </figure>
-        </li> <!-- FIX 5: <figure> was outside the <li>, now correctly nested inside it -->
-        <li>
-          <p>I've heard good things about going here:</p>
-          <address>Athens, Greece<br>Krabi, Thailand</address>
-        </li>
-      </ul>
-      <!--TODO: Add more places-->
- 
-      <h3>Places i want to Avoid</h3>
-      <dl>
-        <dt>North Pole</dt>
-        <dd>I hear this is <strong>cold</strong>!</dd>
-        <dt>South Pole</dt>
-        <dd>This is also cold.</dd>
-        <dt>Mountain Tops</dt> <!-- FIX 6: Typo "Moutain" → "Mountain" -->
-        <dd>These are also cold.</dd>
-      </dl>
-    </section>
- 
-    <hr>
- 
-    <article id="contact">
-      <h2>Contact Me</h2>
-      <p>I'd really like to hear from you!</p>
- 
-      <form action="https://httpbin.org/get" method="get"> <!-- FIX 7: Typo "httbin.org" → "httpbin.org" -->
-        <fieldset>
-          <legend>Personal Info</legend>
-          <p>
-            <label for="firstName">First Name:</label>
-            <input type="text" name="firstName" id="firstName" placeholder="Jane" autocomplete="on" required autofocus>
-          </p>
-          <p>
-            <label for="lastName">Last Name:</label>
-            <input type="text" name="lastName" id="lastName" placeholder="Doe" autocomplete="on" required>
-          </p>
-          <p>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Your Secret" required>
-          </p>
-          <p>
-            <label for="phone">Phone:</label>
-            <input type="tel" name="phone" id="phone" placeholder="5555555555" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
-          </p>
-          <p>
-            <label for="decade">Favorit Decade:</label>
-            <input type="number" name="decade" id="decade" min="1950" max="2026" step="10" value="1980">
-          </p>
-          <!-- FIX 8: Moved closing </fieldset> and </form> so they wrap all fieldsets correctly -->
- 
+        <!--TODO: Add more places-->
+
+        <h3>Places I Want to Avoid</h3>
+        <dl>
+          <dt>North Pole</dt>
+          <dd>I hear this is <strong>cold</strong>!</dd>
+          <dt>South Pole</dt>
+          <dd>This is also cold.</dd>
+          <dt>Mountain Tops</dt>
+          <dd>These are also cold.</dd>
+        </dl>
+      </section>
+
+      <hr>
+
+      <article id="contact" class="card">
+        <h2>Contact Me</h2>
+        <p>I'd really like to hear from you!</p>
+
+        <form action="https://httpbin.org/get" method="get">
           <fieldset>
-            <legend>What is your favorit food?</legend>
-            <p><input type="radio" name="food" id="pizza" value="pizza"><label for="pizza">Pizza</label></p> <!-- FIX 9: value was "food" instead of "pizza" -->
-            <p><input type="radio" name="food" id="tacos" value="tacos"><label for="tacos">Tacos</label></p>
-            <p><input type="radio" name="food" id="burgers" value="burgers"><label for="burgers">Burgers</label></p>
-            <p><input type="radio" name="food" id="sushi" value="sushi"><label for="sushi">Sushi</label></p>
-            <p><input type="radio" name="food" id="other" value="other"><label for="other">Other</label></p>
+            <legend>Personal Info</legend>
+            <p>
+              <label for="firstName">First Name:</label>
+              <input type="text" name="firstName" id="firstName" placeholder="Jane" autocomplete="on" required autofocus>
+            </p>
+            <p>
+              <label for="lastName">Last Name:</label>
+              <input type="text" name="lastName" id="lastName" placeholder="Doe" autocomplete="on" required>
+            </p>
+            <p>
+              <label for="password">Password:</label>
+              <input type="password" name="password" id="password" placeholder="Your Secret" required>
+            </p>
+            <p>
+              <label for="phone">Phone:</label>
+              <input type="tel" name="phone" id="phone" placeholder="5555555555" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+            </p>
+            <p>
+              <label for="decade">Favorite Decade:</label>
+              <input type="number" name="decade" id="decade" min="1950" max="2026" step="10" value="1980">
+            </p>
+
+            <fieldset>
+              <legend>What is your favorite food?</legend>
+              <p><input type="radio" name="food" id="pizza" value="pizza"><label for="pizza">Pizza</label></p>
+              <p><input type="radio" name="food" id="tacos" value="tacos"><label for="tacos">Tacos</label></p>
+              <p><input type="radio" name="food" id="burgers" value="burgers"><label for="burgers">Burgers</label></p>
+              <p><input type="radio" name="food" id="sushi" value="sushi"><label for="sushi">Sushi</label></p>
+              <p><input type="radio" name="food" id="other" value="other"><label for="other">Other</label></p>
+            </fieldset>
           </fieldset>
-        </fieldset>
-      
-    <fieldset>
-  <legend>Do you have pets?</legend>
-  <p>
-    <input type="checkbox" name="pets" id="dog" value="dog">
-    <label for="dog">Dog</label>
-  </p>
-  <p>
-    <input type="checkbox" name="pets" id="cat" value="cat">
-    <label for="cat">Cat</label>
-  </p>
-  <p>
-    <input type="checkbox" name="pets" id="fish" value="fish">
-    <label for="fish">Fish</label>
-  </p>
-  <p>
-    <input type="checkbox" name="pets" id="otherpets" value="otherpets">
-    <label for="otherpets">Other</label>
-  </p>
-</fieldset>
- <br>
- <fieldset>
-   <legend>Send Me A Note</legend>
-  <label for="message">Your Message:</label>
-  <br>
-  <textarea name="message" id="message" cols="30" rows="10"
-    placeholder="Type your message here"></textarea>
- </fieldset>
-   <br>
-   <button type="submit">Submit</button>
-   <button type="submit" formaction="https://httpbin.org/post" formmethod="post">Post</button>
-    <button type="reset">Reset</button>
-    <hr>
-    &lt;&lt;&lt; &copy; <a href="about.html">Orfeas Nilsson</a> &gt;&gt;&gt;
-    <p><a href="#">Back to Top</a></p>
-   </form>
-    </article>
+
+          <fieldset>
+            <legend>Do you have pets?</legend>
+            <p><input type="checkbox" name="pets" id="dog" value="dog"><label for="dog">Dog</label></p>
+            <p><input type="checkbox" name="pets" id="cat" value="cat"><label for="cat">Cat</label></p>
+            <p><input type="checkbox" name="pets" id="fish" value="fish"><label for="fish">Fish</label></p>
+            <p><input type="checkbox" name="pets" id="otherpets" value="otherpets"><label for="otherpets">Other</label></p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Send Me A Note</legend>
+            <label for="message">Your Message:</label>
+            <textarea name="message" id="message" cols="30" rows="10" placeholder="Type your message here"></textarea>
+          </fieldset>
+
+          <div class="btn-row">
+            <button type="submit">Submit</button>
+            <button type="submit" formaction="https://httpbin.org/post" formmethod="post">Post</button>
+            <button type="reset">Reset</button>
+          </div>
+        </form>
+      </article>
+
+      <div class="footer">
+        &lt;&lt;&lt; &copy; <a href="about.html">Orfeas Nilsson</a> &gt;&gt;&gt;
+        <br>
+        <a href="#" class="back-top">↑ Back to Top</a>
+      </div>
+
+    </div>
   </body>
 </html>
