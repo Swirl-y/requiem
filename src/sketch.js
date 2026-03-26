@@ -8,8 +8,10 @@ const sketch = (p5) => {
   let horses = [];
   p5.setup = async () => {
     p5.createCanvas(640, 480);
-    spritedata = await p5.loadJSON("src/assets/horse.json");
-    spritesheet = await p5.loadImage("src/assets/horse.png");
+    const url = new URL('./assets/horse.png', import.meta.url).href
+    const urlj = new URL('./assets/horse.json', import.meta.url).href
+    spritedata = await p5.loadJSON(urlj);
+    spritesheet =await p5.loadImage(url);
     let frames = spritedata.frames;
     for (let i = 0; i < frames.length; i++) {
       let pos = frames[i].position;
